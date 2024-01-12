@@ -21,8 +21,8 @@ public class Player : MonoBehaviour
     {
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(playerSpeed * Input.GetAxisRaw("Horizontal"), GetComponent<Rigidbody2D>().velocity.y);
-        if (Input.GetAxisRaw("Horizontal") == 1) GetComponent<SpriteRenderer>().flipX = false;
-        if (Input.GetAxisRaw("Horizontal") == -1) GetComponent<SpriteRenderer>().flipX = true;
+        if (Input.GetAxisRaw("Horizontal") == 1) GetComponent<SpriteRenderer>().flipX = true;
+        if (Input.GetAxisRaw("Horizontal") == -1) GetComponent<SpriteRenderer>().flipX = false;
 
 
 
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             AudioManager.instance.PlaySFX("Jump");
-            particles.Play();
+            //particles.Play();
 
         }
 
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         else
         {
             // Si está sobre una superficie pero se mueve lateralmente
-            if (GetComponent<Rigidbody2D>().velocity.x != 0) SetAnimation("Run");
+            if (GetComponent<Rigidbody2D>().velocity.x != 0) SetAnimation("Walk");
             else SetAnimation("Idle"); // Si está sobre una superficie pero no se mueve
         }
 
@@ -83,7 +83,6 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision);
         if (collision != null)
         {
             if (collision.collider.CompareTag("Enemy"))
