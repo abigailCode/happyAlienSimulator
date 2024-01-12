@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CoinsCollector : MonoBehaviour
 {
-    public int objectivePoints;
+    public int points;
     private ScoreManager scoreManager;
 
     private void Start()
@@ -22,7 +22,7 @@ public class CoinsCollector : MonoBehaviour
         {
             if (scoreManager != null)
             {
-                scoreManager.AddPoints(objectivePoints);
+                scoreManager.AddPoints(points);
             }
             Destroy(gameObject);
         }
