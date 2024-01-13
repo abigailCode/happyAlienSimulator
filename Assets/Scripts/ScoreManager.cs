@@ -17,6 +17,8 @@ public class ScoreManager : MonoBehaviour
     public void AddPoints(int pointsToAdd)
     {
         score += pointsToAdd;
+        AudioManager.instance.PlaySFX("CollectCoin");
+
         UpdateScoreText();
     }
 
@@ -25,6 +27,25 @@ public class ScoreManager : MonoBehaviour
         if (text != null) 
         {
             text.text = score + "/" +objectiveScore;
+        }
+
+        if (score >= objectiveScore)
+        {
+            LoadNextScene();
+        }
+    }
+
+    void LoadNextScene()
+    {
+        string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (currentSceneName == "Game")
+        {
+            SceneController.instance.LoadScene("Level2");
+        }
+        else if (currentSceneName == "Level2")
+        {
+            SceneController.instance.LoadScene("Victory");
         }
     }
 }

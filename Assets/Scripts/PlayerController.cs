@@ -26,11 +26,11 @@ public class Player : MonoBehaviour
 
 
 
-        if (Input.GetButtonDown("Fire1") && !isJumping)
+        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && !isJumping)
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             AudioManager.instance.PlaySFX("Jump");
-            //particles.Play();
+            particles.Play();
 
         }
 
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
             if (collision.collider.CompareTag("Enemy"))
             {
                 AudioManager.instance.PlaySFX("Hit");
-                AudioManager.instance.PlayMusic("LoseALife");
+                AudioManager.instance.PlaySFX("Lose");
                 SceneController.instance.LoadScene("Gameover");
 
             }
